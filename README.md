@@ -1,5 +1,5 @@
 # PromptVT
-This project is the implementation of paper PromptVT, including models and testing codes(the training codes will be uploaded when it is organized).
+This project is the implementation of paper PromptVT, including models and testing codes(the training code will be uploaded after organizing).
 
 ## Usage
 ### Installation
