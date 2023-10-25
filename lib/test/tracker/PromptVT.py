@@ -77,7 +77,7 @@ class PromptVT(BaseTracker):
         elif self.Datasetname == 'uav':
             self.conf = 0.5
             self.interval = 100
-        elif self.Datasetname == 'got_10ktest':
+        elif self.Datasetname == 'got10k_test':
             self.conf = 0.6
             self.interval = 30
         elif self.Datasetname == 'trackingnet':
@@ -220,7 +220,7 @@ class PromptVT_onnx(BaseTracker):
         elif self.Datasetname == 'uav':
             self.conf = 0.5
             self.interval = 100
-        elif self.Datasetname == 'got_10ktest':
+        elif self.Datasetname == 'got10k_test':
             self.conf = 0.6
             self.interval = 30
         elif self.Datasetname == 'trackingnet':
