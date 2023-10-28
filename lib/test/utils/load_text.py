@@ -16,8 +16,8 @@ def load_text_numpy(path, delimiter, dtype):
         ground_truth_rect = np.loadtxt(path, delimiter=delimiter, dtype=dtype)
         return ground_truth_rect
 
-''' for otbdatasets
-def load_text_numpy(path, delimiter, dtype):
+
+def load_text_numpy_otb(path, delimiter, dtype):
     if isinstance(delimiter, (tuple, list)):
         for d in delimiter:
             try:
@@ -35,7 +35,7 @@ def load_text_numpy(path, delimiter, dtype):
         raise Exception('Could not read file {}'.format(path))
     else:
         ground_truth_rect = np.loadtxt(path, delimiter=delimiter, dtype=dtype)
-'''
+
 
 def load_text_pandas(path, delimiter, dtype):
     if isinstance(delimiter, (tuple, list)):
@@ -56,6 +56,9 @@ def load_text_pandas(path, delimiter, dtype):
 
 def load_text(path, delimiter=' ', dtype=np.float32, backend='numpy'):
     if backend == 'numpy':
-        return load_text_numpy(path, delimiter, dtype)
+        if 'OTB' in path:
+            return load_text_numpy_otb(path, delimiter, dtype)
+        else:
+            return load_text_numpy(path, delimiter, dtype)
     elif backend == 'pandas':
         return load_text_pandas(path, delimiter, dtype)
