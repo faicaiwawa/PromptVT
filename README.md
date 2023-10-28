@@ -1,7 +1,7 @@
 # PromptVT
 This project is the implementation of paper PromptVT, including models and testing codes(the training code will be uploaded after organizing).
 
-:exclamation: Ubuntu is highly recommended, windows has some weird installation problems and model inference problems.
+:exclamation: Ubuntu is highly recommended, Windows has some weird installation problems and model inference problems.
 
 :exclamation: This is the CPU version, no CUDA or GPU required.
 
