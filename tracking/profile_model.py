@@ -70,13 +70,9 @@ if __name__ == "__main__":
     #device = "cuda:0"
     #torch.cuda.set_device(device)
     device = "cpu"
-    # Compute the Flops and Params of our STARK-S model
     args = parse_args()
-    '''update cfg'''
     yaml_fname = '/home/qiuyang/efttrack_s1/experiments/%s/%s.yaml' % (args.script, args.config)
-    #/home/qiuyang/Stark/experiments/stark_lightning_X_trt
     update_config_from_file(yaml_fname)
-    '''set some values'''
     bs = 1
     z_sz = cfg.TEST.TEMPLATE_SIZE
     x_sz = cfg.TEST.SEARCH_SIZE
