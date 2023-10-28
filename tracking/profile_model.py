@@ -71,7 +71,7 @@ if __name__ == "__main__":
     #torch.cuda.set_device(device)
     device = "cpu"
     args = parse_args()
-    yaml_fname = '/home/qiuyang/efttrack_s1/experiments/%s/%s.yaml' % (args.script, args.config)
+    yaml_fname = '/home/qiuyang/PromptVT/experiments/%s/%s.yaml' % (args.script, args.config)
     update_config_from_file(yaml_fname)
     bs = 1
     z_sz = cfg.TEST.TEMPLATE_SIZE
