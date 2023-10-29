@@ -3,7 +3,7 @@ This project is the implementation of paper PromptVT, including models and testi
 
 :exclamation: Ubuntu(Linux) is highly recommended, Windows has some weird installation problems and model inference problems.
 
-:exclamation: This is the CPU version, no CUDA or GPU required.
+:exclamation: This is the CPU edition, no CUDA or GPU required.
 
 ## Usage
 ### Installation
