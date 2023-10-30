@@ -89,6 +89,9 @@ class PromptVT(BaseTracker):
         elif self.Datasetname == 'otb':
             self.conf = 0.6
             self.interval = 20
+        elif self.Datasetname == 'video':
+            self.conf = 0.5
+            self.interval = 30
         else:
             raise ValueError("Invalid dataset.")
 
@@ -232,6 +235,9 @@ class PromptVT_onnx(BaseTracker):
         elif self.Datasetname == 'otb':
             self.conf = 0.6
             self.interval = 20
+        elif self.Datasetname == 'video':
+            self.conf = 0.5
+            self.interval = 30
         else:
             raise ValueError("Invalid dataset.")
 
