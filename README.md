@@ -108,7 +108,7 @@ If you want to use ONNX model, set ' use_onnx = True ' in `./lib/test/tracker/Pr
   
 ##  Model Zoo & Raw Results
 The trained models and the raw tracking results are provided in the [model zoo](https://drive.google.com/file/d/1AuYS8OUXbHhe7QlfVF9vC3EVyzNsReDC/view?usp=drive_link).<br />
-put pytorch model in  `./checkpoints/PromptVT/baseline/`, put onnx model in `./tracking/`.<br />
+put PyTorch model and  ONNX model in  `./checkpoints/PromptVT/baseline/`.<br />
 We also provide model conversion scripts . `./tracking/****_onnx.py`
  
 
