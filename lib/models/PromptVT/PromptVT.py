@@ -10,7 +10,7 @@ from lib.models.PromptVT.exemplar_transformer import ExemplarTransformer
 from lib.models.model_parts import *
 
 from lib.models.cross_attention_encoder.hierarchical_featurefusion_network import *
-from lib.models.PromptVT.adaptivefusionmodule import AdaptiveFusion
+from lib.models.PromptVT.DTP import DTP
 import numpy as np
 import time
 class PromptVT(nn.Module):
@@ -58,8 +58,8 @@ class PromptVT(nn.Module):
                                                 temperature=temperature, dropout=dropout)
         self.branch_4 = SeparableConv2d_BNReLU_out(outchannels_cls, inchannels, kernel_size=3, stride=1,
                                                    padding=padding_3)
-        self.AdaptiveFusion_8 = AdaptiveFusion(inplanes=128, hide_channel=24, smooth=True)
-        self.AdaptiveFusion_16 = AdaptiveFusion(inplanes=128, hide_channel=24, smooth=True)
+        self.DTP_8 = DTP(inplanes=128, hide_channel=24, smooth=True)
+        self.DTP_16 = DTP(inplanes=128, hide_channel=24, smooth=True)
 
     def PLforward(self, x):
         x = self.branch_1(x)
@@ -99,10 +99,10 @@ class PromptVT(nn.Module):
         _framid = framid
         if (self.updateflag == True or _framid == 1):
             n , b , c = src_temp_8.shape
-            self.fused_src_temp_8 = self.AdaptiveFusion_8(torch.cat([src_temp_8.permute(1, 2, 0).view(b, c, int(n ** 0.5) ,int(n ** 0.5)),
+            self.fused_src_temp_8 = self.DTP_8(torch.cat([src_temp_8.permute(1, 2, 0).view(b, c, int(n ** 0.5) ,int(n ** 0.5)),
                                                       dy_temp_8.permute(1, 2, 0).view(b, c, int(n ** 0.5) ,int(n ** 0.5))], dim=1)).permute(2, 3, 0, 1).contiguous().view(-1, b, c)
             n, b, c = src_temp_16.shape
-            self.fused_src_temp_16 = self.AdaptiveFusion_16(torch.cat([src_temp_16.permute(1, 2, 0).view(b, c, int(n ** 0.5) ,int(n ** 0.5)),
+            self.fused_src_temp_16 = self.DTP_16(torch.cat([src_temp_16.permute(1, 2, 0).view(b, c, int(n ** 0.5) ,int(n ** 0.5)),
                                                         dy_temp_16.permute(1, 2, 0).view(b, c, int(n ** 0.5) ,int(n ** 0.5))], dim=1)).permute(2, 3, 0, 1).contiguous().view(-1, b, c)
             self.updateflag = False
             #print("dynamic template has been fused !")
