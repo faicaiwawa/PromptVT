@@ -1,7 +1,7 @@
 from lib.test.tracker.basetracker import BaseTracker
 import torch
 from lib.train.data.processing_utils import sample_target
-# for debug
+
 import cv2
 import os
 from lib.utils.merge import get_qkv
@@ -66,7 +66,6 @@ class PromptVT(BaseTracker):
         with torch.no_grad():
             self.z_dict1 = self.network.forward_backbone(template1, zx="template0", mask=template_mask1)
             self.z_dict2 = self.network.forward_backbone(template2, zx="template0", mask=template_mask2)
-        # save states
         self.z_dict_list.append(self.z_dict1)
         self.z_dict_list.append(self.z_dict2)
         self.state = info['init_bbox']
@@ -104,12 +103,8 @@ class PromptVT(BaseTracker):
         with torch.no_grad():
             model_time_start = time.time()
             x_dict = self.network.forward_backbone(search, zx="search", mask=search_mask)
-            # merge the template and the search
-            #feat_dict_list = [self.z_dict1,self.z_dict2, x_dict]
-
             feat_dict_list = [self.z_dict_list[0], self.z_dict_list[1], x_dict]
             src_temp_8, pos_temp_8, src_temp_16, pos_temp_16, src_search_8, pos_search_8, src_search_16 ,pos_search_16,dy_temp_8,dy_temp_16 = get_qkv(feat_dict_list)
-            # run the transformer
             out_dict, _, _ = self.network.forward_transformer(src_temp_8 = src_temp_8  , pos_temp_8 = pos_temp_8, src_temp_16 = src_temp_16,
                                                               pos_temp_16 = pos_temp_16, src_search_8 = src_search_8, pos_search_8 = pos_search_8 ,
                                                               src_search_16 = src_search_16 ,pos_search_16 = pos_search_16,dy_temp_8 = dy_temp_8,dy_temp_16 = dy_temp_16,run_box_head=True, run_cls_head=True,
@@ -117,18 +112,11 @@ class PromptVT(BaseTracker):
             model_time_1 = time.time() - model_time_start
         self.flag = False
         pred_boxes = out_dict['pred_boxes'].view(-1, 4)
-        # Baseline: Take the mean of all pred boxes as the final result
         pred_box = (pred_boxes.mean(dim=0) * self.params.search_size / resize_factor).tolist()  # (cx, cy, w, h) [0,1]
-        # get the final box result
         self.state = clip_box(self.map_box_back(pred_box, resize_factor), H, W, margin=10)
         conf_score = out_dict["pred_logits"].view(-1).sigmoid().item()
-
-        #conf_score = 0.6
-        #if(self.frame_id %100 ==0):
-        #    print('a')
+        
         for idx, update_i in enumerate(self.update_intervals):
-
-
             if self.frame_id % self.interval == 0 and conf_score > self.conf:
                 z_patch_arr, _, z_amask_arr = sample_target(image, self.state, self.params.template_factor,
                                                             output_sz=self.params.template_size)  # (x1, y1, w, h)
@@ -140,14 +128,12 @@ class PromptVT(BaseTracker):
                     self.model_time_2 = time.time() - model_time_start
                 self.z_dict_list[idx+1] = z_dict_t  # the 1st element of z_dict_list is template from the 1st frame
                 self.flag = True
-                #print(len(self.z_dict_list))
-                #print("dynamic template has been replaced !")
-                #print(self.frame_id)
+
         if(self.flag ==True):
             model_time = model_time_1 + self.model_time_2
         else:
             model_time = model_time_1
-        # for debug
+
         if self.debug:
             x1, y1, w, h = self.state
             image_BGR = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
@@ -205,7 +191,7 @@ class PromptVT_onnx(BaseTracker):
                                                         output_sz=self.params.template_size)
         template1, template_mask1 = self.preprocessor.process(z_patch_arr, z_amask_arr)
         template2, template_mask2 = self.preprocessor.process(x_patch_arr_s, x_amask_arr_s)
-        # forward the template once
+        
         ort_inputs_1 = {'img_z': template1, 'mask_z': template_mask1}
         ort_inputs_2 = {'img_z': template2, 'mask_z': template_mask2}
         self.ort_outs_z_1 = self.ort_sess_z.run(None, ort_inputs_1)
@@ -213,7 +199,6 @@ class PromptVT_onnx(BaseTracker):
         self.ort_z_dict_list.append(self.ort_outs_z_1)
         self.ort_z_dict_list.append(self.ort_outs_z_2)
 
-        # save states
         self.state = info['init_bbox']
         self.frame_id = 0
 
@@ -254,8 +239,8 @@ class PromptVT_onnx(BaseTracker):
             'src_temp_16' :self.ort_z_dict_list[0][2],
             'dy_src_temp_8':self.ort_z_dict_list[1][0],
             'dy_src_temp_16':self.ort_z_dict_list[1][2]}
+            
             fused_temp_8 , fused_temp_16 = self.ort_sess_DTP.run(None, ort_inputs_fuse)
-            #print('fused')
             self.fuse_src_temp_8 = fused_temp_8
             self.fuse_src_temp_16 = fused_temp_16
         self.flag = False
@@ -272,12 +257,10 @@ class PromptVT_onnx(BaseTracker):
 
         self.model_time_1 = time.time()-model_time_start
         pred_box = (outputs_coord.reshape(4) * self.params.search_size / resize_factor).tolist()  # (cx, cy, w, h) [0,1]
-        # get the final box result
+
         self.state = clip_box(self.map_box_back(pred_box, resize_factor), H, W, margin=10)
-
-
+        
         conf_score = _sigmoid(pred_logits[0][0]).item()
-        # for debug
 
         for idx, update_i in enumerate(self.update_intervals):
             if self.frame_id % self.interval == 0 and conf_score > self.conf:
@@ -291,13 +274,14 @@ class PromptVT_onnx(BaseTracker):
                     self.model_time_2 = time.time()-model_time_start
                 self.ort_z_dict_list[idx+1] = ort_outs_z  # the 1st element of z_dict_list is template from the 1st frame
                 self.flag = True
-                #print("dynamic template has been replaced !")
+                
         if(self.flag == True):
-            model_time =   self.model_time_2 + self.model_time_1
+            model_time = self.model_time_2 + self.model_time_1
         else:
-            model_time =    self.model_time_1
+            model_time = self.model_time_1
         return {"target_bbox": self.state,
                 "model_time": model_time}
+        
         if self.debug:
             x1, y1, w, h = self.state
             image_BGR = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
