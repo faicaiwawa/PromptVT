@@ -172,7 +172,7 @@ class PromptVT_onnx(BaseTracker):
         providers = ['CPUExecutionProvider']
         self.ort_sess_z = onnxruntime.InferenceSession("Template_Branch.onnx", providers=providers)
         self.ort_sess_x = onnxruntime.InferenceSession("Search_Branch.onnx", providers=providers)
-        self.ort_sess_aff = onnxruntime.InferenceSession("ATF.onnx", providers=providers                                                     )
+        self.ort_sess_DTP = onnxruntime.InferenceSession("DTP.onnx", providers=providers                                                     )
         self.preprocessor = PreprocessorX_onnx()
         print("Testing Dataset: ", dataset_name)
         self.state = None
@@ -254,7 +254,7 @@ class PromptVT_onnx(BaseTracker):
             'src_temp_16' :self.ort_z_dict_list[0][2],
             'dy_src_temp_8':self.ort_z_dict_list[1][0],
             'dy_src_temp_16':self.ort_z_dict_list[1][2]}
-            fused_temp_8 , fused_temp_16 = self.ort_sess_aff.run(None, ort_inputs_fuse)
+            fused_temp_8 , fused_temp_16 = self.ort_sess_DTP.run(None, ort_inputs_fuse)
             #print('fused')
             self.fuse_src_temp_8 = fused_temp_8
             self.fuse_src_temp_16 = fused_temp_16
