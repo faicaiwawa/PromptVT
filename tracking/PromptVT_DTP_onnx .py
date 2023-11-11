@@ -73,7 +73,6 @@ if __name__ == "__main__":
     '''set some values'''
     bs = 1
     z_sz = cfg.TEST.TEMPLATE_SIZE
-    # build the stark model
     model = build_PromptVT(cfg, phase='test')
     # load checkpoint
     if load_checkpoint:
