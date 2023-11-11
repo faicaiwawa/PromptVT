@@ -101,7 +101,6 @@ if __name__ == "__main__":
     device = 'cpu'
     yaml_fname = '/home/qiuyang/PromptVT/experiments/%s/%s.yaml' % (args.script, args.config)
     update_config_from_file(yaml_fname)
-    # build the stark model
     model = build_PromptVT(cfg, phase='test')
     # load checkpoint
     if load_checkpoint:
