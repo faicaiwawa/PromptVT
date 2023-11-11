@@ -6,11 +6,11 @@ import cv2
 import os
 from lib.utils.merge import get_qkv
 from lib.models.PromptVT import build_PromptVT
-from lib.test.tracker.stark_utils import PreprocessorX,PreprocessorX_cpu
+from lib.test.tracker.utils import PreprocessorX,PreprocessorX_cpu
 from lib.utils.box_ops import clip_box
 from lib.models.PromptVT.mobileone import  reparameterize_model
 #for onnxruntime
-from lib.test.tracker.stark_utils import PreprocessorX_onnx
+from lib.test.tracker.utils import PreprocessorX_onnx
 import onnxruntime
 import multiprocessing
 import numpy as np
