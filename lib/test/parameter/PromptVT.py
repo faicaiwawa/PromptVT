@@ -21,7 +21,7 @@ def parameters(yaml_name: str):
     params.search_size = cfg.TEST.SEARCH_SIZE
 
 
-    params.checkpoint = os.path.join(save_dir,"checkpoints/PromptVT/baseline/PromptVT.pth")
+    params.checkpoint ="./checkpoints/PromptVT/baseline/PromptVT.pth"
 
 
 
