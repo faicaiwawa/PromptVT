@@ -24,7 +24,7 @@ def evaluate(model, f):
 
 
 def get_data(bs, sz, hw_z=64, hw_x=256, c=256):
-    F = torch.rand(1,1,512, 8, 8)
+    F = torch.rand(1,1,256, 8, 8)
     return F
 
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     bs = 1
 
     # build the stark model
-    model  = AdaptiveFusion(inplanes=256, hide_channel=24, smooth=True)
+    model  = AdaptiveFusion(inplanes=128, hide_channel=24, smooth=True)
 
     model.eval()
 
