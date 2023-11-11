@@ -156,9 +156,9 @@ class PromptVT_onnx(BaseTracker):
     def __init__(self, params, dataset_name):
         super(PromptVT_onnx, self).__init__(params)
         providers = ['CPUExecutionProvider']
-        self.ort_sess_z = onnxruntime.InferenceSession("Template_Branch.onnx", providers=providers)
-        self.ort_sess_x = onnxruntime.InferenceSession("Search_Branch.onnx", providers=providers)
-        self.ort_sess_DTP = onnxruntime.InferenceSession("DTP.onnx", providers=providers                                                     )
+        self.ort_sess_z = onnxruntime.InferenceSession("./checkpoints/PromptVT/baseline/Template_Branch.onnx", providers=providers)
+        self.ort_sess_x = onnxruntime.InferenceSession("./checkpoints/PromptVT/baseline/Search_Branch.onnx", providers=providers)
+        self.ort_sess_DTP = onnxruntime.InferenceSession("./checkpoints/PromptVT/baseline/DTP.onnx", providers=providers)
         self.preprocessor = PreprocessorX_onnx()
         print("Testing Dataset: ", dataset_name)
         self.state = None
