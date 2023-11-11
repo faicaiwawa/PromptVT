@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # load checkpoint
     if load_checkpoint:
         save_dir = env_settings().save_dir
-        checkpoint_name = "/home/qiuyang/PromptVT/checkpoints/PromptVT/baseline/standar_vipt_channel_24/b_updated.pth"
+        checkpoint_name = "<PATH TO PROMPTVT.PTH>"
         model.load_state_dict(torch.load(checkpoint_name, map_location='cpu')['net'], strict=True)
     # transfer to test mode
     model.eval()
