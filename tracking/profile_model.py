@@ -79,10 +79,8 @@ if __name__ == "__main__":
     hw_z = cfg.DATA.TEMPLATE.FEAT_SIZE ** 2
     hw_x = cfg.DATA.SEARCH.FEAT_SIZE ** 2
     c = cfg.MODEL.HIDDEN_DIM
-    # build the stark model
     model = build_PromptVT(cfg, phase='test')
     # transfer to test mode
-    #model = repvgg_model_convert(model)
     model.eval()
     model = reparameterize_model(model)
     print(model)
