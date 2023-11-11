@@ -7,11 +7,10 @@ class Prompt(nn.Module):
         super().__init__()
 
         self.softmax = nn.Softmax(dim=-1)
-
         self.smooth = smooth
         if smooth:
             self.smooth = nn.Parameter(torch.zeros(1) + 10.0)
-        self.smooth.requires_grad=False
+        self.smooth.requires_grad=False #for test
 
     def forward(self, x):
         '''
@@ -29,9 +28,9 @@ class Prompt(nn.Module):
 
         return output
 
-class AdaptiveFusion(nn.Module,):
+class DTP(nn.Module,):
     def __init__(self, inplanes=None, hide_channel=None ,smooth=True):
-        super(AdaptiveFusion, self).__init__()
+        super(DTP, self).__init__()
         self.conv0_0 = nn.Conv2d(in_channels=inplanes, out_channels=hide_channel, kernel_size=1, stride=1, padding=0)
         self.conv0_1 = nn.Conv2d(in_channels=inplanes, out_channels=hide_channel, kernel_size=1, stride=1, padding=0)
         self.conv1x1 = nn.Conv2d(in_channels=hide_channel, out_channels=inplanes, kernel_size=1, stride=1, padding=0)
@@ -47,7 +46,7 @@ class AdaptiveFusion(nn.Module,):
     def forward(self, x):
         """ Forward pass with input x. """
         B, C, W, H = x.shape
-            #x0 initialtemp, x1 dynamictemp
+        #x0 srctemp, x1 dynamictemp
         t = int(C/2) #for onnx
         x0 = x[:, 0:t, :, :].contiguous()
         x0 =x0.permute(0, 2, 3, 1).contiguous()
