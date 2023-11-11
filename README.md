@@ -107,7 +107,7 @@ If you want to use ONNX model, set ' use_onnx = True ' in `./lib/test/tracker/Pr
   place the `tracking/Calculate_FPS.py` in the tracking results folder and run it.
   
 ##  Model Zoo & Raw Results
-The trained models and the raw tracking results are provided in the [model zoo](https://drive.google.com/file/d/1wfioy0wnoMkvvcGauckCjasilKZhI2a8/view?usp=sharing).<br />
+The trained models and the raw tracking results are provided in the [model zoo](https://drive.google.com/file/d/1AuYS8OUXbHhe7QlfVF9vC3EVyzNsReDC/view?usp=drive_link).<br />
 put pytorch model in  `./checkpoints/PromptVT/baseline/`, put onnx model in `./tracking/`.<br />
 We also provide model conversion scripts . `./tracking/****_onnx.py`
  
