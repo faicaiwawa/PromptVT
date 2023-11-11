@@ -18,7 +18,7 @@ def run_tracker(tracker_name, tracker_param, run_id=None, dataset_name='otb', se
         tracker_name: Name of tracking method.
         tracker_param: Name of parameter file.
         run_id: The run id.
-        dataset_name: Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).
+        dataset_name: Name of dataset (otb, trackingnet, uav, got10k_test, lasot).
         sequence: Sequence number or name.
         debug: Debug level.
         threads: Number of threads.
@@ -39,13 +39,7 @@ def main():
     parser.add_argument('--tracker_name', type=str, default='PromptVT',help='Name of tracking method.')
     parser.add_argument('--tracker_param', type=str, default='baseline',help='Name of config file.')
     parser.add_argument('--runid', type=int, default=None, help='The run id.')
-    parser.add_argument('--dataset_name', type=str, default='uav', help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
-    #parser.add_argument('--dataset_name', type=str, default='got10k_test',help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
-    #parser.add_argument('--dataset_name', type=str, default='trackingnet', help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
-    #parser.add_argument('--dataset_name', type=str, default='lasot',help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
-    #parser.add_argument('--dataset_name', type=str, default='otb',help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
-    #parser.add_argument('--dataset_name', type=str, default='utb', help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
-    #parser.add_argument('--dataset_name', type=str, default='lasot', help='Name of dataset (otb, nfs, uav, tpl, vot, tn, gott, gotv, lasot).')
+    parser.add_argument('--dataset_name', type=str, default='uav', help='Name of dataset (otb, trackingnet, uav, got10k_test, lasot).'
     parser.add_argument('--sequence', type=str, default=None, help='Sequence number or name.')
     parser.add_argument('--debug', type=int, default=0, help='Debug level.')
     parser.add_argument('--threads', type=int, default=0, help='Number of threads.')
