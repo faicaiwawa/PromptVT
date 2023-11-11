@@ -23,21 +23,13 @@ class PreprocessorX(object):
         self.std = torch.tensor([0.229, 0.224, 0.225]).view((1, 3, 1, 1)).cuda()
 
     def process(self, img_arr: np.ndarray, amask_arr: np.ndarray):
-        # Deal with the image patch
-        #if img_arr.shape[0] == 128:
+
         img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).unsqueeze(dim=0).contiguous()
-         #img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).reshape(1,3,128,128).contiguous()#for ncnn
+
         img_tensor_norm = ((img_tensor / 255.0) - self.mean) / self.std  # (1,3,H,W)
-        # Deal with the attention mask
-        #amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().unsqueeze(dim=0).contiguous()  # (1,H,W)
-        #amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().reshape(1,128,128).contiguous()#for ncnn
-        # if img_arr.shape[0] == 320:
-        # #img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).unsqueeze(dim=0).contiguous()
-        #  img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).reshape(1,3,320,320).contiguous()#for ncnn
-        #  img_tensor_norm = ((img_tensor / 255.0) - self.mean) / self.std  # (1,3,H,W)
-        # Deal with the attention mask
+
         amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().unsqueeze(dim=0).contiguous()  # (1,H,W)
-         #amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().reshape(1,320,320).contiguous()#for ncnn
+
         return img_tensor_norm, amask_tensor
 
 class PreprocessorX_cpu(object):
@@ -46,21 +38,13 @@ class PreprocessorX_cpu(object):
         self.std = torch.tensor([0.229, 0.224, 0.225]).view((1, 3, 1, 1))
 
     def process(self, img_arr: np.ndarray, amask_arr: np.ndarray):
-        # Deal with the image patch
-        #if img_arr.shape[0] == 128:
+
         img_tensor = torch.tensor(img_arr).float().permute((2,0,1)).unsqueeze(dim=0).contiguous()
-         #img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).reshape(1,3,128,128).contiguous()#for ncnn
+         
         img_tensor_norm = ((img_tensor / 255.0) - self.mean) / self.std  # (1,3,H,W)
-        # Deal with the attention mask
-        #amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().unsqueeze(dim=0).contiguous()  # (1,H,W)
-        #amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().reshape(1,128,128).contiguous()#for ncnn
-        # if img_arr.shape[0] == 320:
-        # #img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).unsqueeze(dim=0).contiguous()
-        #  img_tensor = torch.tensor(img_arr).cuda().float().permute((2,0,1)).reshape(1,3,320,320).contiguous()#for ncnn
-        #  img_tensor_norm = ((img_tensor / 255.0) - self.mean) / self.std  # (1,3,H,W)
-        # Deal with the attention mask
+        
         amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).unsqueeze(dim=0).contiguous()  # (1,H,W)
-         #amask_tensor = torch.from_numpy(amask_arr).to(torch.bool).cuda().reshape(1,320,320).contiguous()#for ncnn
+
         return img_tensor_norm, amask_tensor
 
 
