@@ -34,11 +34,11 @@ def get_data(bs, sz):
     return src_temp_8, src_temp_16, dy_src_temp_8, dy_src_temp_16
 
 
-class AFF(nn.Module):
-    def __init__(self, AFF_8,AFF_16):
-        super(AFF, self).__init__()
-        self.AFF_8 = AFF_8
-        self.AFF_16 = AFF_16
+class DTP(nn.Module):
+    def __init__(self, DTP_8, DTP_16):
+        super(DTP, self).__init__()
+        self.DTP_8 = DTP_8
+        self.DTP_16 = DTP_16
 
     def forward(self, src_temp_8, src_temp_16, dy_src_temp_8, dy_src_temp_16):
 
@@ -52,9 +52,9 @@ class AFF(nn.Module):
         con_temp_16 = torch.cat([src_temp_16.permute(1, 2, 0).view(b, c, t, t),
                    dy_src_temp_16.permute(1, 2, 0).view(b, c, t, t)], dim=1)
 
-        fused_temp_8 = AFF_8(con_temp_8).permute(2, 3, 0, 1).contiguous().view(-1, b, c)
+        fused_temp_8 = DTP_8(con_temp_8).permute(2, 3, 0, 1).contiguous().view(-1, b, c)
 
-        fused_temp_16 = AFF_16(con_temp_16).permute(2, 3, 0, 1).contiguous().view(-1, b, c)
+        fused_temp_16 = DTP_16(con_temp_16).permute(2, 3, 0, 1).contiguous().view(-1, b, c)
 
         return  fused_temp_8, fused_temp_16
 
@@ -65,7 +65,7 @@ def to_numpy(tensor):
 
 if __name__ == "__main__":
     load_checkpoint = True
-    save_name = "AFF.onnx"
+    save_name = "DTP.onnx"
     """update cfg"""
     args = parse_args()
     yaml_fname = '../experiments/%s/%s.yaml' % (args.script, args.config)
@@ -78,15 +78,15 @@ if __name__ == "__main__":
     # load checkpoint
     if load_checkpoint:
         save_dir = env_settings().save_dir
-        checkpoint_name = checkpoint_name = "/home/qiuyang/PromptVT/checkpoints/PromptVT/baseline/standar_vipt_channel_24/b_updated.pth"
+        checkpoint_name = checkpoint_name = "<PATH TO PROMPTVT.PTH>"
         model.load_state_dict(torch.load(checkpoint_name, map_location='cpu')['net'], strict=True)
     # transfer to test mode
     model.eval()
     model = reparameterize_model(model)
     """ rebuild the inference-time model """
-    AFF_8 = model.AdaptiveFusion_8
-    AFF_16 = model.AdaptiveFusion_16
-    torch_model = AFF(AFF_8,AFF_16)
+    DTP_8 = model.DTP_8
+    DTP_16 = model.DTP_16
+    torch_model = DTP(DTP_8, DTP_16)
     print(torch_model)
     # get the template
     src_temp_8, src_temp_16, dy_src_temp_8, dy_src_temp_16 = get_data(bs, z_sz)
