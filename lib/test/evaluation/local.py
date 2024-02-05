@@ -27,6 +27,9 @@ def local_env_settings():
     settings.uav_path = '/home/qiuyang/datasets/UAV123'
     settings.vot_path = '/home/qiuyang/PromptVT/data/VOT2019'
     settings.youtubevos_dir = ''
-
+    settings.antiuav_path = '/home/qiuyang/datasets/Anti-UAV/test/'
+    settings.antiuav410_path = '/home/qiuyang/datasets/Anti-UAV-410/test'
+    settings.antiuav410forjson_path = '/home/qiuyang/datasets/Anti-UAV-410/testforjson'
+    settings.antiuavforjson_path = '/home/qiuyang/forjson/Anti-UAV/test/'
     return settings
 
