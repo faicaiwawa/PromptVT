@@ -84,6 +84,16 @@ If you want to use ONNX model, set ' use_onnx = True ' in `./lib/test/tracker/Pr
   python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset uav
   python tracking/analysis_results.py # need to modify tracker configs and names
   ```
+* AntiUAV
+  ```
+  python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset antiuav
+  python tracking/analysis_results.py # need to modify tracker configs and names
+  ```
+* AntiUAV410
+  ```
+  python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset antiuav410
+  python tracking/analysis_results.py # need to modify tracker configs and names
+  ```    
 * OTB100
   ```
   python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset otb
