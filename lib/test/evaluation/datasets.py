@@ -7,6 +7,10 @@ DatasetInfo = namedtuple('DatasetInfo', ['module', 'class_name', 'kwargs'])
 pt = "lib.test.evaluation.%sdataset"  # Useful abbreviations to reduce the clutter
 
 dataset_dict = dict(
+        antiuavforjson=DatasetInfo(module=pt % "antiuavforjson", class_name="AntiUAVforjsonDataset", kwargs=dict()),
+    antiuav=DatasetInfo(module=pt % "antiuav", class_name="AntiUAVDataset", kwargs=dict()),
+    antiuav410=DatasetInfo(module=pt % "antiuav410", class_name="AntiUAV410Dataset", kwargs=dict()),
+antiuav410forjson=DatasetInfo(module=pt % "antiuav410forjson", class_name="AntiUAV410forjsonDataset", kwargs=dict()),
     utb=DatasetInfo(module=pt % "utb", class_name="UTBDataset", kwargs=dict()),
     otb=DatasetInfo(module=pt % "otb", class_name="OTBDataset", kwargs=dict()),
     nfs=DatasetInfo(module=pt % "nfs", class_name="NFSDataset", kwargs=dict()),
