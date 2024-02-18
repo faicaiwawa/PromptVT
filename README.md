@@ -45,11 +45,11 @@ ${PromptVT_ROOT}
               |-- UAV123
          |-- data_seq
               |-- UAV123
-    -- Anti-UAV
+     -- Anti-UAV
          |-- Test
               |-- 20190925_111757_1_1
               ...
-       -- Anti-UAV-410
+     -- Anti-UAV-410
          |-- Test
               |-- 02_6319_1500-2999
               ...
