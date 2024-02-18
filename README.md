@@ -98,11 +98,13 @@ If you want to use ONNX model, set ' use_onnx = True ' in `./lib/test/tracker/Pr
   python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset antiuav
   python tracking/analysis_results.py # need to modify tracker configs and names
   ```
+  The raw data is labeled in json format, which we converted to OTB-like-txt format to fit our tracking library. The converted file is located at `. /tracking/AntiUAVJSON2OTBTxt.py`.
 * AntiUAV410
   ```
   python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset antiuav410
   python tracking/analysis_results.py # need to modify tracker configs and names
-  ```    
+  ```
+  The raw data is labeled in json format, which we converted to OTB-like-txt format to fit our tracking library. The converted file is located at `. /tracking/AntiUAVJSON2OTBTxt.py`.
 * OTB100
   ```
   python tracking/test.py --tracker_name PromptVT --tracker_param baseline --dataset otb
