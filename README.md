@@ -6,7 +6,7 @@ This project is the implementation of paper [PromptVT](https://ieeexplore.ieee.o
 :exclamation: This is the CPU edition, no CUDA or GPU required.
 
 ## Performance
-PromptVTd  achieves SOTA performance on 8 benchmarks in lightweight trackers.
+PromptVT  achieves SOTA performance on 8 benchmarks in lightweight trackers.
 ![图片1](external/vot20/PromptVT/0.png)
 
 
@@ -145,7 +145,7 @@ If you want to use ONNX model, set ' use_onnx = True ' in `./lib/test/tracker/Pr
 The trained models and the raw tracking results are provided in the [model zoo](https://drive.google.com/file/d/1QMk1rlOhQWsztc7fYUOLd5sW08OC1_-Z/view?usp=drive_link).<br />
 put PyTorch model and  ONNX model in  `./checkpoints/PromptVT/baseline/`.<br />
 We also provide model conversion scripts`./tracking/****_onnx.py`.
- 
+
 
 ## Acknowledgments
 Thanks for the [PyTracking](https://github.com/visionml/pytracking) and [STARK](https://github.com/researchmm/Stark) for helping us quickly implement our ideas.
