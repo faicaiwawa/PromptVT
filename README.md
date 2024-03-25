@@ -10,13 +10,13 @@ PromptVTd  achieves SOTA performance on 8 benchmarks in lightweight trackers.
 ![图片1](external/vot20/PromptVT/0.png)
 
 
-<img src="external/vot20/PromptVT/1.png" alt="图片2" width="500"> <img src="external/vot20/PromptVT/6.png" alt="图片2" width="500">
+<img src="external/vot20/PromptVT/1.png" alt="图片2" width="400"> <img src="external/vot20/PromptVT/6.png" alt="图片2" width="400">
 
 ![图片1](external/vot20/PromptVT/2.png)
 
 
-<img src="external/vot20/PromptVT/4.png" alt="图片2" width="500"> <img src="external/vot20/PromptVT/5.png" alt="图片2" width="500">
-<img src="external/vot20/PromptVT/3.png" alt="图片2" width="500">
+<img src="external/vot20/PromptVT/4.png" alt="图片2" width="400"> <img src="external/vot20/PromptVT/5.png" alt="图片2" width="400">
+<img src="external/vot20/PromptVT/3.png" alt="图片2" width="400">
 
 
 ## Usage
