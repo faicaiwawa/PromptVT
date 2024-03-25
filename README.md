@@ -1,9 +1,12 @@
 # PromptVT
-This project is the implementation of paper [PromptVT](https://ieeexplore.ieee.org/document/10468656), including models and testing codes(the training code will be uploaded after organizing).
+This project is the implementation of paper [PromptVT](https://ieeexplore.ieee.org/document/10468656), including **models**, **raw results**, and **testing codes**(the training code will be uploaded after organizing).
 
 :exclamation: Ubuntu(Linux) is highly recommended, Windows has some weird installation problems and model inference problems.
 
 :exclamation: This is the CPU edition, no CUDA or GPU required.
+
+## Performance
+PromptVTd  achieves SOTA performance in lightweight trackers.
 
 ## Usage
 ### Installation
