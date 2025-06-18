@@ -1,7 +1,9 @@
 # PromptVT
-This project is the implementation of paper [PromptVT](https://ieeexplore.ieee.org/document/10468656), including **models**, **raw results**, and **testing codes**.
+This project is the implementation of paper [PromptVT](https://ieeexplore.ieee.org/document/10468656), including **models**, **raw results**, and **testing codes**. 
 
-:exclamation: This is the CPU edition, no CUDA or GPU required.
+Due to a failure of the school server, the **training code was lost**. The training framework of this model is basically the same as that of STARK-ST, so you can refer to its implementation.
+
+This is the CPU edition, no CUDA or GPU required.
 
 ## Performance
 PromptVT  achieves SOTA performance on 8 benchmarks in lightweight trackers.
